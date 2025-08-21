@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/style.css?ts=" + new Date().getTime();
+        document.head.appendChild(link);
+    </script>
+    <link rel="icon" href="/img/kfc.png">
+    <title>menu</title>
+</head>
+<body>
+    <div class="body2">
+        <div class="top">
+            <div class="header">
+                <div class="conteiner">
+                    <div class="logoKrb">
+                        <div class="logo">
+                            <img class="logoimg" src="/img/kfc.png" alt="">
+                        </div>
+                        <div>
+                            <div class="KRB">
+                                <div class="gps">
+                                    <img class="gpsimg" src="/img/gps.png" alt="">
+                                </div>
+                                Карабалык
+                            </div>
+                            <div class="Dos">Доствка работает с 9:00 до 21:00</div>
+                        </div>
+                    </div>
+                    <div class="number">
+                        <div class="phone">
+                            <img class="phoneimg" src="/img/phone.png" alt="">
+                        </div>
+                        <div class="numbertext">+7(000) 000-00-00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top" style="background-color: #ffffff00; box-shadow: 0 4px 15px rgba(0, 0, 0, 0);">
+            <div class="navig" style="background-color: #ffffff00;">
+                <div class="menu" id="menu" style="background-color: #ffffff00;"></div>
+            </div>
+        </div>
+        <div class="main">
+            <div id="menu-container"></div>
+            <script>
+                async function loadPage() {
+                    const res = await fetch('/api/v1/menu');
+                    const categories = await res.json();
+
+                    // меню сверху
+                    const menu = document.getElementById('menu');
+                    menu.innerHTML = '';
+                    categories.forEach(category => {
+                        const link = document.createElement('a');
+                        link.classList.add('menubutton');
+                        link.href = `#${category.name}`;
+                        link.textContent = category.name;
+                        menu.appendChild(link);
+                    });
+
+                    // блоки категорий с блюдами
+                    const container = document.getElementById('menu-container');
+                    container.innerHTML = '';
+                    categories.forEach(category => {
+                        const categoryBlock = document.createElement('div');
+                        categoryBlock.classList.add('category-block');
+                        categoryBlock.innerHTML = `
+                            <div class="categories_text" id="${category.name}">${category.name}</div>
+                            <div class="categories">
+                                ${category.dishes.map(dish => `
+                                    <div class='dish'>
+                                        <div class="full_description">
+                                            <img class='dishimg' src='${dish.image_path}' alt=''>
+                                            <div class='dish_name'>${dish.name}</div>
+                                            <div class='dish_description'>${dish.description}</div>
+                                        </div>
+                                        <div class="button_and_price">
+                                            <div class='price'>${dish.price}тг</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                        container.appendChild(categoryBlock);
+                    });
+                }
+
+                document.addEventListener('DOMContentLoaded', loadPage);
+            </script>
+        </div>
+    </div>
+</body>
+</html>

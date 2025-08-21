@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>add</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/edit.css">
+    <link rel="icon" href="/img/kfc.png">
+</head>
+
+<body>
+    <div class="main">
+        <div class="dish" id="dish"></div>
+    </div>
+
+    <script>
+        async function loadDish() {
+            const res = await fetch('/api/v1/category');
+            const categories = await res.json();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentCategory = urlParams.get("category");
+
+            // генерим список option для select
+            const options = categories.map(cat =>
+                `<option value="${cat.name}" ${cat.name === currentCategory ? 'selected' : ''}>${cat.name}</option>`
+            ).join('');
+
+            const container = document.getElementById("dish");
+            container.innerHTML = `
+                <form id="editForm">
+                    <input class="text" type="file" accept="image/*" name="image" id="image"> 
+                    <input class="text" type="text" name="name" id="name" value="Название">
+
+                    <select class="text" name="category" id="category">
+                        ${options}
+                    </select>
+
+                    <textarea class="text" name="description" id="description">Описание</textarea>
+                    <div class="button_and_price">
+                        <input class="text" type="number" name="price" id="price" value="0">
+                        <input class="button" type="submit" value="Готово">
+                    </div>
+                </form> 
+            `;
+
+            const form = document.getElementById('editForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+
+                const response = await fetch('/api/v1/menu/add_dish', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('Блюдо добавлено!');
+                    window.location.href = 'admin.html';
+                } else {
+                    const errorText = await response.text(); // читаем тело как текст
+                    alert('Ошибка: ' + errorText);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadDish);
+    </script>
+</body>
+
+</html>

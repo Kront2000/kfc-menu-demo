@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/css/style.css?ts=${System.currentTimeMillis()}">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <div class="top">
+        <div class="header">
+            <div class="conteiner">
+                <div class="logoKrb">
+                    <div class="logo">
+                        <img class="logoimg" src="${pageContext.request.contextPath}/img/gurmaniya.png" alt="">
+                    </div>
+                    <div>
+
+                        <div class="KRB">
+                            <div class="gps">
+                                <img class="gpsimg" src="${pageContext.request.contextPath}/img/gps.png" alt="">
+                            </div>
+                            Карабалык
+                        </div>
+                        <div class="Dos">Доствка работает с 9:00 до 21:00</div>
+                    </div>
+                </div>
+
+                <div class="number">
+                    <div class="phone">
+                        <img class="phoneimg" src="${pageContext.request.contextPath}/img/phone.png" alt="">
+                    </div>
+                    <div class="numbertext">+7(705) 419-70-50</div>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="navig">
+            <div class="menu">
+                <a class="menubutton" href="">Сеты</a>
+                <a class="menubutton" href="">Роллы</a>
+                <a class="menubutton" href="">Запечёные</a>
+                <a class="menubutton" href="">Шаурма</a>
+                <a class="menubutton" href="">Горячее</a>
+                <a class="menubutton" href="">Напитки</a>
+            </div>
+        </div>
+        <div class="line"></div>
+
+
+    </div>
+    <div class="main">
+        <div class="categories_text">Сеты</div>
+        <div class="categories" id="set-dishes">
+
+        </div>
+        <script>
+            async function loadSetDishes() {
+                const res = await fetch('/dish');
+                const dishes = await res.json();
+
+                const container = document.getElementById('set-dishes');
+                container.innerHTML = '';
+
+                dishes.filter(d => d.category_name == 'Сеты')
+                .forEach(dish => {
+                    const html = `
+                        <div class='dish'>
+                        <div class="full_description">
+                            <img class='dishimg' src='${dish.image_path}' alt=''>
+                            <div class='dish_name'>${dish.name}</div>
+                            <div class='dish_description'>${dish.description}</div>
+                        </div>
+
+                        <div class="button_and_price">
+                            <div class='price'>${dish.price}тг</div>
+
+                        </div>
+
+                    </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            }
+            document.addEventListener('DOMContentLoaded', loadSetDishes);
+        </script>
+
+
+    </div>
+    
+</body>
+
+</html>

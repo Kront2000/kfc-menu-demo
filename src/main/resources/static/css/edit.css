@@ -1,0 +1,138 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-color: #19191a;
+}
+h1{
+    font-family: -apple-system, system-ui, "Helvetica Neue", Roboto, sans-serif;
+    color: #f5f5f5;
+    font-weight:bold;
+}
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: -apple-system, system-ui, "Helvetica Neue", Roboto, sans-serif;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #f5f5f5;
+}
+img{
+    width: 335px;
+    height: auto;
+}
+.inp{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    border: 1px grey solid;
+    background-color: #2f2f31;
+    border-radius: 5px;
+}
+.inp:hover{
+    border: 1px rgb(0, 94, 255) solid;
+}
+
+.button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    height: 30px;
+    font-size: 20px;
+    color: #f5f5f5;
+    border: none;
+    background-color: rgb(0, 42, 255);
+    font-weight: bold;
+}
+.main {
+    margin-top: 5%;
+    
+    /* background-color: rgb(243, 243, 243); */
+    align-items: center;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.button{
+    background-color: rgb(255, 182, 182);
+    border-radius: 5px;
+    border: 1px red solid;
+    align-items: center;
+    margin-right: 25px;
+    height: 35px;
+}
+.button_and_price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.categories_text{
+    font-family: Arial Narrow;
+    font-size: 25px;
+    color: rgb(11, 11, 11);
+    font-weight: bold;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.dish{
+    padding: 5px;
+    margin: 10px;
+    margin-bottom: 30px;
+    transition: background-color 0.2s linear;
+    border-radius: 10px;
+    background-color: #dbdbdb;
+    max-width: 260;
+
+}
+
+.dishimg{
+    width: 241px;
+    height: 241px;
+    margin: 5%;
+    border-radius: 10px;
+
+}
+
+
+.dish_name{
+
+    font-family: arial;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(20, 20, 20);
+
+
+}
+.dish_description{
+    margin-top: 5px;
+    font-family: Arial Narrow;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(115, 115, 115);
+}
+
+.price {
+    margin-top: 25px;
+    margin-left: 25px;
+    font-family: Arial Narrow;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(11, 11, 11);
+    margin-bottom: 20px;
+}
+.text{
+    max-width: 260;
+}
