@@ -46,14 +46,15 @@
 
 ### 1. Клонируем репозиторий
 
-git clone https://github.com/username/gyrmania.git
+git clone https://github.com/Kront2000/kfc-menu-demo
 cd gyrmania
-2. Запускаем через Docker Compose
+
+### 2. Запускаем через Docker Compose
 docker-compose -f docker-compose-dev.yml up --build
 Приложение будет доступно по адресу:
 👉 http://localhost:8080
 
-3. Тестовый пользователь
+### 3. Тестовый пользователь
 Логин: admin
 Пароль: 1q2w3e4r
 
